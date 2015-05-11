@@ -5,7 +5,6 @@ __author__ = 'ommirandap'
 import tweepy as tw
 import OAuthKeys
 import json
-from kitchen.text.converters import to_unicode, to_bytes
 from time import sleep
 
 
@@ -33,31 +32,24 @@ def print_tweet(index, tweet):
     final_text = date + " \t " + username + " \t " + text
     return final_text
 
-n=0
+n=1
 api = return_api(n)
 i = 0
 
-#output_file = codecs.open("/home/ommirandap/PRISMA/DynamicNewsAnalysis/" + cuenta + ".txt", 'w+', 'utf-8')
+with open("/home/ommirandap/PRISMA/DynamicNewsAnalysis/cuentas.txt", 'r') as cuentas:
 
-#with open("/home/ommirandap/PRISMA/DynamicNewsAnalysis/cuentas.txt", 'r') as cuentas:
-
-output = open("/home/ommirandap/PRISMA/DynamicNewsAnalysis/output_kitchen.txt", 'w')
-
-cuenta = "lun"
-for status in tw.Cursor(api.user_timeline, id=cuenta).items(10000):
-    i += 1
-    #output.write(to_bytes(print_tweet(i, status)) + '\n')
-    #print(str(print_tweet(i, status)))
-    jsoniano = json.dumps(status._json)
-    output.write(jsoniano + '\n')
-    #print(jsoniano)
-    #print jsoniano.get("text")
-
-    if(i==1000):
+    for cuenta in cuentas:
+        output = open("/home/ommirandap/PRISMA/DynamicNewsAnalysis/data/" + cuenta.replace("\n","") + ".txt", 'w')
         i=0
-        n=n+1
-        api = return_api(n)
-    #sleep(2)
-    #break
+        for status in tw.Cursor(api.user_timeline, id=cuenta).items(10000):
+            i += 1
+            jsoniano = json.dumps(status._json)
+            output.write(jsoniano + '\n')
+            if(i % 1000 == 0):
+                print("Llevo " + str(i) + " tweets de la cuenta: " + cuenta + " con credential: " + str(n))
+                n += 1
+                api = return_api(n)
+        print("Duermo un ratito")
+        sleep(10*60)
 
 
