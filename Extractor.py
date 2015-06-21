@@ -39,16 +39,18 @@ i = 0
 with open("/home/ommirandap/PRISMA/DynamicNewsAnalysis/cuentas.txt", 'r') as cuentas:
 
     for cuenta in cuentas:
-        output = open("/home/ommirandap/PRISMA/DynamicNewsAnalysis/data/" + cuenta.replace("\n","") + ".txt", 'w')
+        output = open("/home/ommirandap/PRISMA/DynamicNewsAnalysis/data/" + cuenta.replace("\n","") + "-page.txt", 'w')
         i=0
-        for status in tw.Cursor(api.user_timeline, id=cuenta).items(10000):
+        for status in tw.Cursor(api.user_timeline, id=cuenta).items(3000):
             i += 1
-            jsoniano = json.dumps(status._json)
+            jsoniano = json.dumps(status._json )
             output.write(jsoniano + '\n')
+            
             if(i % 1000 == 0):
                 print("Llevo " + str(i) + " tweets de la cuenta: " + cuenta + " con credential: " + str(n))
                 n += 1
                 api = return_api(n)
+        
         print("Duermo un ratito")
         sleep(10*60)
 
