@@ -2,10 +2,14 @@
 #  -*- coding: utf-8 -*-
 
 __author__ = 'ommirandap'
+import json
+import os
+import sys
+
 import tweepy as tw
+
 import OAuthKeys
-import json, os, sys
-from time import sleep
+
 
 # Global variables
 TW_ACCOUNT = LAST_ID = ""

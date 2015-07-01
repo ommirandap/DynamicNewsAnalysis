@@ -2,10 +2,12 @@
 #  -*- coding: utf-8 -*-
 
 __author__ = 'ommirandap'
-import tweepy as tw
-import OAuthKeys
 import json
-from time import sleep
+
+import tweepy as tw
+
+import OAuthKeys
+
 
 def return_api(n):
     index = n % len(OAuthKeys.credentials)
