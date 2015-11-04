@@ -38,10 +38,10 @@ n=1
 api = return_api(n)
 i = 0
 
-with open("/home/ommirandap/PRISMA/DynamicNewsAnalysis/cuentas.txt", 'r') as cuentas:
+with open("/home/ommirandap/PRISMA/dynews/cuentas.txt", 'r') as cuentas:
 
     for cuenta in cuentas:
-        output = open("/home/ommirandap/PRISMA/DynamicNewsAnalysis/data/" + cuenta.replace("\n","") + "-page.txt", 'w')
+        output = open("/home/ommirandap/PRISMA/dynews/data/" + cuenta.replace("\n","") + "-page.txt", 'w')
         i=0
         for status in tw.Cursor(api.user_timeline, id=cuenta).items(3000):
             i += 1

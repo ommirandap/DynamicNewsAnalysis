@@ -23,7 +23,7 @@ def main():
     index = 0
     api = return_api(index)
 
-    output = open("/home/ommirandap/PRISMA/DynamicNewsAnalysis/" + CUENTA + "-page.txt", 'w')
+    output = open("/home/ommirandap/PRISMA/dynews/" + CUENTA + "-page.txt", 'w')
 
     lastID = ""
     n_tweets = 0
