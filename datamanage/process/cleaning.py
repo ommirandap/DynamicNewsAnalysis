@@ -9,6 +9,7 @@ import re
 '''
 Regular expressions obtained from Jorge's data cleaning
 '''
+# TODO remove numbers, it seems that jorge dont remove numbers
 remove = re.compile(r"\b\S{1,2}\b|#\S+|@\w+|\bhttps?\S+\b")
 replace = re.compile(r"\s+|[!\"#$%&\'()*+,-./:;<=>?@\[\\\]^_`{|}~]")
 shorten = re.compile(r"\s+")
@@ -19,7 +20,7 @@ SPANISH_STOPWORDS = set(stopwords.words('spanish'))
 SPANISH_STOPWORDS_NORM = set(map(normalize_text, stopwords.words('spanish')))
 FINAL_SW = SPANISH_STOPWORDS.union(SPANISH_STOPWORDS_NORM)
 #SPANISH_STOPWORDS_NORM = map
-ls# ((
+# ((
 #    lambda text: unidecode(text).strip().lower().replace('\n', ' ').
 #    replace('\r', '')), SPANISH_STOPWORDS)
 
