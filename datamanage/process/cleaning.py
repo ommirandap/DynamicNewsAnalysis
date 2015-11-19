@@ -25,8 +25,18 @@ FINAL_SW = SPANISH_STOPWORDS.union(SPANISH_STOPWORDS_NORM)
 #    replace('\r', '')), SPANISH_STOPWORDS)
 
 def clean_text(text):
+    '''
+    Here there is an unusual behaviour when this function is applied to the
+    entire Dataframe, only fails on 2 rows. The input to normalize_text is NaN
+    an it fails applying .lower().
+    So this function catch that and magically returns ''
+    '''
 
-    pre_text = normalize_text(text).split()
+    try:
+        pre_text = normalize_text(text).split()
+    except Exception:
+        return ''
+
     post_text = filter(remove_stopword_lambda(FINAL_SW), pre_text)
 
     return ' '.join(post_text)
